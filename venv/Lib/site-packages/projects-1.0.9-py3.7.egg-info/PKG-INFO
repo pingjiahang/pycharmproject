@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: projects
+Version: 1.0.9
+Summary: The intuitive project manager
+Home-page: https://github.com/tiborsimon/projects
+Author: Tibor Simon
+Author-email: tibor@tiborsimon.io
+License: MIT
+Description: projects is an easy to use project navigation tool and a Makefile-like scripting engine. It's main purpose is to provide a simpler scripting interface with a built in man page generator. You can define your commands with inline documentation in Projectfiles. You can have one Projectfile in every directory inside your project, projects will process them recursively.
+Keywords: project management command line terminal projects tool utility script scripting engine manual man
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Utilities
+Classifier: Environment :: Console
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Unix
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python

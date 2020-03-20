@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+CYAN=$(tput setaf 6)
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+
+# checking   if there is an active alias for the p command to source it
+if ! alias | grep --quiet "alias p='. p'"; then
+    echo "Welcome to ${BOLD}projects${RESET}!"
+    echo "It seems that this is one of the first time you run the ${BOLD}p${RESET} command."
+    echo "There are some configurations to do before you can use the full feature set."
+
+    if echo $SHELL | grep --quiet "/bash"; then
+        SH=bash
+        RC_FILE=.bashrc
+    elif echo $SHELL | grep --quiet "/sh"; then
+        SH=sh
+        RC_FILE=.shrc
+    elif echo $SHELL | grep --quiet "/zsh"; then
+        SH=zsh
+        RC_FILE=.zshrc
+    fi
+
+    grep --quiet "alias p='. p'" $RC_FILE
+    if [ "$?" !=  "0" ]; then
+        echo "Since you are using ${BOLD}$SH${RESET} an alias has appended to your ${BOLD}$RC_FILE${RESET}."
+        echo '' >> ~/$RC_FILE
+        echo "alias p='. p'" >> ~/$RC_FILE
+    fi
+
+    echo "You only need to source the modified file: ${YELLOW}source ~/$RC_FILE${RESET}"
+
+else
+    PATH_FILE=~/.p-path
+    python -m projects $(pwd) $@
+    if [ -f $PATH_FILE ]; then
+        cd $(cat $PATH_FILE)
+        rm $PATH_FILE
+    fi
+fi
+
