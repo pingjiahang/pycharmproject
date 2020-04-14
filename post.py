@@ -12,11 +12,12 @@ class   Youdao():
         self.ts=self.get_ts()
         self.salt=self.get_salt()
         self.sign=self.get_sign()
+        self.md5=self.get_md5()
 
 
     def get_salt(self):
         s=str(random.randint(0,10))
-        t=self.ts()
+        t=self.ts
         print("random=",s)
         print("ts=",t)
         print("salt=",t+s)
@@ -30,11 +31,11 @@ class   Youdao():
         return m.hexdigest()
 
     def get_sign(self):
-        i=self.salt()
-        e=self.content()
+        i=self.salt
+        e=self.content
         s="fanyideskweb" + e + i + "Nw(nmmbP%A-r6U3EUn]Aj"
-        print("s=",s,"md5=",get_md5(s))
-        return get_md5(s)
+        print("s=",s,"md5=",self.md5)
+        return self.md5
         #return '039b6c51c66ba62540119833ad93d999'
 
 
@@ -77,10 +78,13 @@ class   Youdao():
 
     def fanyi(self):
         response=requests.post(self.url,data=self.yield_form_date(),headers=self.get_headers())
-        return response.text
+        import json
+        content=json.loads(response.text)
+        return content('translateResult')[0][0]['tgt']
 
 
 if __name__=='__main__':
+    i=input("please input: ")
     youdao=Youdao('我们')
     print(youdao.fanyi())
     #print(get_headers())
